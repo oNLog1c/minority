@@ -32,6 +32,14 @@ public class FuriousMonstersExampleFeature extends MinorityFeature implements Li
 
 }
 ```
+### Registring the class
+```java
+class YourPlugin extends MinorityExtension {
+    super.getConfigurationWizard().generate(FuriousMonstersExampleFeature.class);
+}
+```
+
+
 ### Result
 ```yaml
 
