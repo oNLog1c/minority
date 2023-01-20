@@ -1,5 +1,5 @@
 # Description
-**Minority** is a functional library for fast and modern plugin development for Bukkit.  
+**Minority** is a functional library for fast and modern Bukkit plugin development.  
 
 At this moment, Minority have only one function: automatic generation of configs using annotations. You no longer need to write and update configs yourself every time, just mark the class that you want to configure in the future with the **@Section** annotation, and the fields that need to be added to the config with the **@Key** annotation. After registering this class in **ConfigurationWizard** and enabling the server, config will be ready!  
 
