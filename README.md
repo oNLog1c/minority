@@ -50,7 +50,7 @@ public class FuriousMonstersExampleFeature extends MinorityFeature implements Li
 
 }
 ```
-### Registring the class
+### Registering the class
 ```java
 class YourPlugin extends MinorityExtension {
     // MinorityExtension extends from JavaPlugin, so it can be used as the Main class in plugin.yml
