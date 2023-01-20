@@ -5,7 +5,7 @@ At this moment, Minority have only one function: automatic generation of configs
 
 Also, Minority **automatically initializes** marked fields for registered classes using the Reflection API, which avoids confusion and errors due to inattention, because you only need to specify the field value once. Minority will do the rest for you.
 
-## Example usage
+## Usage
 ```java
 @Section(path = "monsters-skills",
         comment = "More dangerous monsters with their own skills will make gameplay more interesting.")
