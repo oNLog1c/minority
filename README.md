@@ -5,6 +5,20 @@ At this moment, Minority have only one function: automatic generation of configs
 
 Also, Minority **automatically initializes** marked fields for registered classes using the Reflection API, which avoids confusion and errors due to inattention, because you only need to specify the field value once. Minority will do the rest for you.
 
+## Maven
+```xml
+<repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+</repository>
+
+<dependency>
+    <groupId>com.github.oNLog1c</groupId>
+    <artifactId>Minority</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+
 ## Usage
 ```java
 @Section(path = "monsters-skills",
