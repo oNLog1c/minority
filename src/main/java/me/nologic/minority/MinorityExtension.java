@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class MinorityExtension extends JavaPlugin {
 
+    // TODO: add comments
     private ConfigurationWizard configurationWizard;
 
     public ConfigurationWizard getConfigurationWizard() {

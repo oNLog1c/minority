@@ -1,7 +1,0 @@
-name: Minority
-version: '${project.version}'
-main: me.nologic.minority.Minority
-api-version: 1.19
-load: STARTUP
-authors: [ NoLogic ]
-description: Functional library with smart API for quicker and modern Bukkit plugin development.
