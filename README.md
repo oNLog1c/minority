@@ -5,6 +5,11 @@ At this moment, Minority have only one function: automatic generation of configs
 
 Also, Minority **automatically initializes** marked fields for registered classes using the Reflection API, which avoids confusion and errors due to inattention, because you only need to specify the field value once. Minority will do the rest for you.
 
+## TODO
+- Language annotations
+- Custom biome API
+- QoL-functions in MinorityExpansion
+
 ## Maven
 ```xml
 <repository>
