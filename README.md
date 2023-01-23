@@ -7,6 +7,7 @@ Also, Minority **automatically initializes** marked fields in registered classes
 
 ## TODO
 - Language annotations
+- Easy SQLite DB creation
 - Custom biome API
 - QoL-functions in MinorityExpansion
 
