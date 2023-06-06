@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 public @interface Section {
 
     /** Targeted config file, where section will be stored. By default, is config.yml. */
-    String configFileName() default "config.yml";
+    String file() default "config.yml";
 
     /* Name of the section in the config file. */
     String path();

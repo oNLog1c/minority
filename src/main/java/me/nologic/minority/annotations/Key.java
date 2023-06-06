@@ -10,6 +10,9 @@ public @interface Key {
 
     String path();
 
+    /* Section in the config file, used only for language files ATM. */
+    String section() default "default";
+
     /* Default value. */
     String value();
 
