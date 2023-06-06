@@ -14,9 +14,7 @@ public interface MinorityFeature {
      * @param clazz is a class which should implement MinorityFeature
      * */
     @SneakyThrows
-    default void init(Object object, Class<? extends MinorityFeature> clazz) {
-
-        final MinorityExtension plugin = MinorityExtension.getInstance();
+    default void init(Object object, Class<? extends MinorityFeature> clazz, MinorityExtension plugin) {
 
         // 1. If class have @Translatable annotation, look for fields with @Key annotation and init it
         if (clazz.isAnnotationPresent(Translatable.class)) {

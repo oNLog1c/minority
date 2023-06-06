@@ -1,27 +1,19 @@
 package me.nologic.minority;
 
-import lombok.Setter;
 import lombok.SneakyThrows;
 import me.nologic.minority.config.ConfigurationWizard;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 
 public abstract class MinorityExtension extends JavaPlugin {
 
-    @Setter
-    private static MinorityExtension instance;
 
     // TODO: add comments
     private ConfigurationWizard configurationWizard;
     private YamlConfiguration   language;
-
-    public static MinorityExtension getInstance() {
-        return instance;
-    }
 
     public ConfigurationWizard getConfigurationWizard() {
         return configurationWizard == null ? (configurationWizard = new ConfigurationWizard(this)) : this.configurationWizard;
