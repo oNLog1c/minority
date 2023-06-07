@@ -77,20 +77,33 @@ monsters-skills:
     adipisci velit...
 ```
 
+
 ## Easy translation
 
-Adding a language support to your plugin never be that easy. Add @Translatable annotation to your class, then just use @Key to describe translatable fields. 
+Adding a language support to your plugin never be that easy.
+Add **@Translatable** annotation to your class, then just use **@Key** to describe the translatable fields. Your class **must** implement the **MinorityFeature** interface.
 ```java
 @Translatable
 public class MessageSender implements MinorityFeature, Listener {
     
     @Key(section = "messages", path = "join-message", value = "Hello, %s! You can see this message only when PlayerJoinEvent fires!")
-    private /* NOT FINAL & STATIC */ String joinMessage; 
+    private /* NOT FINAL or STATIC */ String joinMessage; 
     
     @EventHandler
     private void onPlayerJoin(PlayerJoinEvent event) {
         event.getPlayer().sendMessage(joinMessage);
     }
     
+}
+```
+After that, register this class in the **ConfigurationWizard**, and the translation file will be generated automatically.
+
+```java
+// This usually happens in your plugin's main class, but you can do it elsewhere.
+@Override  
+public void onEnable() {
+	final MessageSender sender = new MessageSender();
+	super.getConfigurationWizard().generate(sender.getClass());
+	Bukkit.getServer().getPluginManager().registerEvents(sender, this);  
 }
 ```
