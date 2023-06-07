@@ -25,7 +25,7 @@ Also, Minority **automatically initializes** marked fields in registered classes
 </dependency>
 ```
 
-## Config generation
+## Automatic config generation
 ```java
 @Section(path = "monsters-skills",
         comment = "More dangerous monsters with their own skills will make gameplay more interesting.")
