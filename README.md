@@ -29,7 +29,7 @@ Also, Minority **automatically initializes** marked fields in registered classes
 ```java
 @Section(path = "monsters-skills",
         comment = "More dangerous monsters with their own skills will make gameplay more interesting.")
-public class FuriousMonstersExampleFeature extends MinorityFeature implements Listener {
+public class FuriousMonstersExampleFeature implements Listener, MinorityFeature {
 
     @Key(path = "zombies-eat-brains", type = Type.BOOLEAN, value = "true",
     comment = { "Wow! Say «No» to uncommented configs!",
@@ -43,10 +43,6 @@ public class FuriousMonstersExampleFeature extends MinorityFeature implements Li
     @Key(path = "join-message", type = Type.STRING, value = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
     comment = "Message? For real?")
     public String message;
-
-    public FuriousMonstersExampleFeature(JavaPlugin plugin) {
-        super(plugin);
-    }
 
     // This event will be automatically registered because of annotation detection in ConfigurationWizard.
     @EventHandler
@@ -79,4 +75,22 @@ monsters-skills:
   # Message? For real?
   join-message: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur,
     adipisci velit...
+```
+
+## Easy translation
+
+Adding a language support to your plugin never be that easy. Add @Translatable annotation to your class, then just use @Key to describe translatable fields. 
+```java
+@Translatable
+public class MessageSender implements MinorityFeature, Listener {
+    
+    @Key(section = "messages", path = "join-message", value = "Hello, %s! You can see this message only when PlayerJoinEvent fires!")
+    private /* NOT FINAL & STATIC */ String joinMessage; 
+    
+    @EventHandler
+    private void onPlayerJoin(PlayerJoinEvent event) {
+        event.getPlayer().sendMessage(joinMessage);
+    }
+    
+}
 ```
