@@ -10,7 +10,6 @@ import java.io.File;
 
 public abstract class MinorityExtension extends JavaPlugin {
 
-
     // TODO: add comments
     private ConfigurationWizard configurationWizard;
     private YamlConfiguration   language;
@@ -28,14 +27,20 @@ public abstract class MinorityExtension extends JavaPlugin {
 
         final FileConfiguration config = super.getConfig();
 
-        // If language key is not exist, create a new one
+        // If language key in config.yml is not exist, create a new one
         if (config.getString("language") == null) {
             config.set("language", "en");
             config.save(super.getDataFolder() + "/config.yml");
         }
 
-        // And return the language yaml configuration (or lazy-load the new one)
-        return language == null ? (language = YamlConfiguration.loadConfiguration(new File(this.getLanguageFolder() + "/" + config.get("language") + ".yml"))) : language;
+        // Lazily load language YamlConfiguration
+        if (language == null) {
+            final File path = new File(this.getLanguageFolder() + "/" + config.get("language") + ".yml");
+            language = YamlConfiguration.loadConfiguration(path);
+            language.save(path);
+        }
+
+        return language;
     }
 
 }
