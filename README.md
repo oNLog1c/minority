@@ -107,14 +107,4 @@ public class MessageSender implements MinorityFeature, Listener {
     
 }
 ```
-Voila, you now have a class that, when created, will generate keys in a language yaml file in the plugin directory (./languages) and automatically initialize all language fields. 
-By default, the language file will be named en.yml.
-
-```java
-// This usually happens in your plugin's main class, but you can do it elsewhere.
-@Override  
-public void onEnable() {
-	final MessageSender sender = new MessageSender();
-	Bukkit.getServer().getPluginManager().registerEvents(sender, this);  
-}
-```
+Voila, you now have a class that, when created, will generate keys in a language yaml file in the plugin directory (./languages) and automatically initialize all language fields. By default, the language file will be named en.yml.
