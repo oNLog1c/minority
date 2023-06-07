@@ -1,7 +1,5 @@
 # Description
-**Minority** is a functional library for fast and modern Bukkit plugin development.  
-
-At this moment, Minority have only one function: automatic generation of configs using annotations. You no longer need to write and update configs yourself every time, just mark the class that you want to configure in the future with the **@Section** annotation, and the fields that need to be added to the config with the **@Key** annotation. After registering this class in **ConfigurationWizard** and enabling the server, config will be ready!  
+**Minority** is a functional library for fast and modern Bukkit plugin development, which provides simple but powerful API for **automatically generating configurations and language files**. Everything works with the help of **annotations** and **reflection**. Working with configs (especially custom ones), as well as supporting different languages ​​for a programmer, has always been a living hell. This will be especially understood by those who have developed more or less complex plugins more than once. With **Minority**, this becomes a much easier task, which, suddenly, can even be enjoyable in its simplicity.
 
 ## TODO
 - ✓ Language annotations ✓
