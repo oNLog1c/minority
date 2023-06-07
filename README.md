@@ -87,13 +87,14 @@ public class MessageSender implements MinorityFeature, Listener {
     
     // Message initialization (can be manual or automatic)
     public MessageSender(final MinorityExtension plugin) {
-    	plugin.getConfigurationWizard().generate(this);
+    	plugin.getConfigurationWizard().generate(this.getClass());
 	
-	// Automatic initialization (it will init all fields with @Key annotation using reflection)
-	this.init(this, this.getClass(), plugin);
+        // Manual field initialization
+        // this.joinMessage = plugin.getLanguage().getString("messages.join-message");
 	
-	// Or the usual manual field initialization, if you don't want to do it automatically for some reason.
-	this.joinMessage = plugin.getLanguage().getString("messages.join-message");
+        // Or automatic (it will init all fields with @Key annotation using reflection)
+        // If you prefer this method, you shouldn't make fields with @Key annotation final.
+        this.init(this, this.getClass(), plugin);
     }
     
     @EventHandler
