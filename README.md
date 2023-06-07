@@ -106,7 +106,7 @@ public class MessageSender implements MinorityFeature, Listener {
 ```
 *Voila*, you now have a class that, when created, will generate keys in a language yaml file in the plugin language directory and automatically initialize all language fields. By default, the language file will be named **en.yml**.
 
-### Result
+### Result (en.yml)
 ```yaml
 
 # This language file was automatically generated with Minority.
