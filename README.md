@@ -3,8 +3,6 @@
 
 At this moment, Minority have only one function: automatic generation of configs using annotations. You no longer need to write and update configs yourself every time, just mark the class that you want to configure in the future with the **@Section** annotation, and the fields that need to be added to the config with the **@Key** annotation. After registering this class in **ConfigurationWizard** and enabling the server, config will be ready!  
 
-Also, Minority **automatically initializes** marked fields in registered classes using the Reflection API, which avoids confusion and errors due to inattention, because you only need to specify the field value once. Minority will do the rest for you.
-
 ## TODO
 - ✓ Language annotations ✓
 - Easy SQLite DB creation
@@ -78,7 +76,7 @@ monsters-skills:
 ```
 
 
-## Easy translation
+## Automatic language.yml generation
 
 Adding a language support to your plugin never be that easy.
 Add **@Translatable** annotation to your class, then just use **@Key** to describe the translatable fields. Your class **must** implement the **MinorityFeature** interface.
