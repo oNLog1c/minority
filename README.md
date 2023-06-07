@@ -89,10 +89,15 @@ public class MessageSender implements MinorityFeature, Listener {
     @Key(section = "messages", path = "join-message", value = "Hello, %s! You can see this message only when PlayerJoinEvent fires!")
     private final String joinMessage; 
     
-    // Manual initialization (it is possible to initialize the message automatically)
+    // Message initialization (can be manual or automatic)
     public MessageSender(final MinorityExtension plugin) {
     	plugin.getConfigurationWizard().generate(this);
+	
+	// Manual field initialization
 	this.joinMessage = plugin.getLanguage().getString("messages.join-message");
+	
+	// Or automatic (it will init all fields with @Key annotation)
+	this.init(this, this.getClass(), plugin);
     }
     
     @EventHandler
@@ -109,7 +114,6 @@ After that, register this class in the **ConfigurationWizard**, and the translat
 @Override  
 public void onEnable() {
 	final MessageSender sender = new MessageSender();
-	super.getConfigurationWizard().generate(sender.getClass());
 	Bukkit.getServer().getPluginManager().registerEvents(sender, this);  
 }
 ```
