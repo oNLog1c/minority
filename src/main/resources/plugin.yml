@@ -1,4 +1,0 @@
-name: FeatureShowcase
-version: '${project.version}'
-main: me.nologic.minority.plugin.FeatureShowcase
-api-version: 1.19

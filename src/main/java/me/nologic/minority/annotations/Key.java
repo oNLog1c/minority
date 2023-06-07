@@ -19,6 +19,6 @@ public @interface Key {
     /* Type of the field. */
     Type type() default Type.STRING;
 
-    String[] comment();
+    String[] comment() default {};
 
 }
