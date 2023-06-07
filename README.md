@@ -87,17 +87,17 @@ Add **@Translatable** annotation to your class, then just use **@Key** to descri
 public class MessageSender implements MinorityFeature, Listener {
     
     @Key(section = "messages", path = "join-message", value = "Hello, %s! You can see this message only when PlayerJoinEvent fires!")
-    private final String joinMessage; 
+    private /* Fields NEVER shouldn't be final if you want to init it automatically! */ String joinMessage; 
     
     // Message initialization (can be manual or automatic)
     public MessageSender(final MinorityExtension plugin) {
     	plugin.getConfigurationWizard().generate(this);
 	
-	// Manual field initialization
-	this.joinMessage = plugin.getLanguage().getString("messages.join-message");
-	
-	// Or automatic (it will init all fields with @Key annotation using reflection)
+	// Automatic initialization (it will init all fields with @Key annotation using reflection)
 	this.init(this, this.getClass(), plugin);
+	
+	// Or the usual manual field initialization, if you don't want to do it automatically for some reason.
+	this.joinMessage = plugin.getLanguage().getString("messages.join-message");
     }
     
     @EventHandler
@@ -107,7 +107,8 @@ public class MessageSender implements MinorityFeature, Listener {
     
 }
 ```
-After that, register this class in the **ConfigurationWizard**, and the translation file will be generated automatically.
+Voila, you now have a class that, when created, will generate keys in a language yaml file in the plugin directory (./languages) and automatically initialize all language fields. 
+By default, the language file will be named en.yml.
 
 ```java
 // This usually happens in your plugin's main class, but you can do it elsewhere.
