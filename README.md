@@ -108,8 +108,10 @@ public class MessageSender implements MinorityFeature, Listener {
 
 ### Result
 ```yaml
+
 # This language file was automatically generated with Minority.
 
 messages:
   join-message: Hello, %s! You can see this message only when PlayerJoinEvent fires!
 ```
+![minority](https://github.com/oNLog1c/Minority/assets/53514252/10144687-2b12-4f04-85c9-9b610e1d636e)
