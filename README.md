@@ -96,7 +96,7 @@ public class MessageSender implements MinorityFeature, Listener {
 	// Manual field initialization
 	this.joinMessage = plugin.getLanguage().getString("messages.join-message");
 	
-	// Or automatic (it will init all fields with @Key annotation)
+	// Or automatic (it will init all fields with @Key annotation using reflection)
 	this.init(this, this.getClass(), plugin);
     }
     
