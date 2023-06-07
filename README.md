@@ -107,4 +107,12 @@ public class MessageSender implements MinorityFeature, Listener {
     
 }
 ```
-Voila, you now have a class that, when created, will generate keys in a language yaml file in the plugin directory (./languages) and automatically initialize all language fields. By default, the language file will be named en.yml.
+*Voila*, you now have a class that, when created, will generate keys in a language yaml file in the plugin language directory and automatically initialize all language fields. By default, the language file will be named **en.yml**.
+
+### Result
+```yaml
+# This language file was automatically generated with Minority.
+
+messages:
+  join-message: Hello, %s! You can see this message only when PlayerJoinEvent fires!
+```
