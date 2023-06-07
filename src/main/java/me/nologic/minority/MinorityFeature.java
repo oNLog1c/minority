@@ -23,7 +23,10 @@ public interface MinorityFeature {
                     final Key key = field.getAnnotation(Key.class);
                     final String path = key.section() + plugin.getLanguage().options().pathSeparator() + key.path();
                     field.setAccessible(true);
+                    plugin.getLogger().info(String.format("Trying to change field %s value to %s.", field.getName(), plugin.getLanguage().get(path)));
                     field.set(object, plugin.getLanguage().get(path));
+                    plugin.getLogger().info(String.format("New value in field %s: %s.", field.getName(), field.get(object)));
+
                 }
             }
         }
