@@ -91,7 +91,7 @@ public class MessageSender implements MinorityFeature, Listener {
     
     @EventHandler
     private void onPlayerJoin(PlayerJoinEvent event) {
-        event.getPlayer().sendMessage(joinMessage);
+        event.getPlayer().sendMessage(joinMessage.formatted(event.getPlayer().getName()));
     }
     
 }
