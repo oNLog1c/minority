@@ -87,7 +87,13 @@ Add **@Translatable** annotation to your class, then just use **@Key** to descri
 public class MessageSender implements MinorityFeature, Listener {
     
     @Key(section = "messages", path = "join-message", value = "Hello, %s! You can see this message only when PlayerJoinEvent fires!")
-    private /* NOT FINAL or STATIC */ String joinMessage; 
+    private final String joinMessage; 
+    
+    // Manual initialization (it is possible to initialize the message automatically)
+    public MessageSender(final MinorityExtension plugin) {
+    	plugin.getConfigurationWizard().generate(this);
+	this.joinMessage = plugin.getLanguage().getString("messages.join-message");
+    }
     
     @EventHandler
     private void onPlayerJoin(PlayerJoinEvent event) {
