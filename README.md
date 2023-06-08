@@ -16,7 +16,7 @@
 
 <dependency>
     <groupId>com.github.oNLog1c</groupId>
-    <artifactId>Minority</artifactId>
+    <artifactId>minority</artifactId>
     <version>1.2</version>
 </dependency>
 ```
