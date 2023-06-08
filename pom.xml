@@ -13,7 +13,7 @@
 
     <description>Functional library with simple but powerful API for quick and modern Bukkit plugin development.</description>
     <properties>
-        <java.version>16</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
