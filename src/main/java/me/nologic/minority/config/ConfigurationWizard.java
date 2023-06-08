@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import me.nologic.minority.MinorityExtension;
 import me.nologic.minority.MinorityFeature;
-import me.nologic.minority.annotations.Key;
-import me.nologic.minority.annotations.Section;
+import me.nologic.minority.annotations.ConfigurationKey;
+import me.nologic.minority.annotations.Configurable;
 
 import me.nologic.minority.annotations.Translatable;
+import me.nologic.minority.annotations.TranslationKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
@@ -32,14 +33,13 @@ public class ConfigurationWizard {
         if (feature.isAnnotationPresent(Translatable.class)) {
             this.plugin.getLogger().info(String.format("%s is a translatable instance.", feature.getName()));
             this.translate(feature);
-            return;
         }
 
         // 1. Firstly, we create a new YamlConfiguration.
         final YamlConfiguration config = new YamlConfiguration();
 
         // TODO: Section.class have the version field. It should be used for auto-updating configurations which is outdated.
-        final Section section = feature.getAnnotation(Section.class);
+        final Configurable section = feature.getAnnotation(Configurable.class);
         final File file = new File(plugin.getDataFolder(), section.file());
 
         // 2. Then, try to load existing configuration. Otherwise, it will be created from scratch.
@@ -50,8 +50,8 @@ public class ConfigurationWizard {
 
         // 4. Scan all fields in iterable class, if field have annotation @Key, it will be stored in our config.
         for (Field field : feature.getDeclaredFields()) {
-            if (field.isAnnotationPresent(Key.class)) {
-                final Key key = field.getAnnotation(Key.class);
+            if (field.isAnnotationPresent(ConfigurationKey.class)) {
+                final ConfigurationKey key = field.getAnnotation(ConfigurationKey.class);
 
                 field.setAccessible(true);
 
@@ -71,8 +71,8 @@ public class ConfigurationWizard {
         // 5. Now, it's time to create a new instance of our class and assign all fields that have the @Key annotation with values from generated/loaded configuration.
         MinorityFeature instance = feature.getConstructor().newInstance();
         for (Field field : instance.getClass().getDeclaredFields()) {
-            if (field.isAnnotationPresent(Key.class)) {
-                Key key = field.getAnnotation(Key.class);
+            if (field.isAnnotationPresent(ConfigurationKey.class)) {
+                ConfigurationKey key = field.getAnnotation(ConfigurationKey.class);
 
                 // TODO: Add support to arrays.
                 // Parse the value and assign it to the marked field!
@@ -110,7 +110,7 @@ public class ConfigurationWizard {
     }
 
     /**
-     * Automatically used on classes with @Translatable annotation.
+     * Automatically used on classes with @Translatable annotation, looking for @TranslationKey.
      * Creates a new language file if it not exist, or update the existing one with the missing keys.
      * */
     @SneakyThrows
@@ -128,13 +128,13 @@ public class ConfigurationWizard {
         // 3. Add header to the language file. TODO: Make it configurable. Or not?
         language.options().setHeader(Collections.singletonList("This language file was automatically generated with Minority."));
 
-        // 4. We want to scan all fields that marked with @Key annotation, then read its path and value.
+        // 4. We want to scan all fields that marked with @TranslationKey annotation, then read its path and value.
         for (Field field : translatable.getDeclaredFields()) {
-            if (field.isAnnotationPresent(Key.class)) {
-                Key key = field.getAnnotation(Key.class);
+            if (field.isAnnotationPresent(TranslationKey.class)) {
+                TranslationKey key = field.getAnnotation(TranslationKey.class);
 
                 // 4.1 If path is already exists, we change nothing, otherwise we save the default value.
-                String path = key.section() + language.options().pathSeparator() + key.path();
+                String path = key.section() + language.options().pathSeparator() + key.name();
                 if (!language.contains(path)) {
                     language.set(path, key.value());
                 }

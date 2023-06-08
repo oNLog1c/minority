@@ -4,7 +4,7 @@ import java.lang.annotation.*;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME) @Target(ElementType.TYPE)
-public @interface Section {
+public @interface Configurable {
 
     /** Targeted config file, where section will be stored. By default, is config.yml. */
     String file() default "config.yml";

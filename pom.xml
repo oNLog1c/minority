@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>lib.minority</groupId>
-    <artifactId>Minority</artifactId>
-    <version>1.1</version>
+    <artifactId>minority</artifactId>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
-    <name>Minority</name>
+    <name>minority</name>
 
-    <description>Functional library with smart API for quick and modern Bukkit plugin development.</description>
+    <description>Functional library with smart but simple API for quick and modern Bukkit plugin development.</description>
     <properties>
         <java.version>16</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

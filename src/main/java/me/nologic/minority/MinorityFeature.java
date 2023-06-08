@@ -1,8 +1,8 @@
 package me.nologic.minority;
 
 import lombok.SneakyThrows;
-import me.nologic.minority.annotations.Key;
 import me.nologic.minority.annotations.Translatable;
+import me.nologic.minority.annotations.TranslationKey;
 
 import java.lang.reflect.Field;
 
@@ -19,9 +19,9 @@ public interface MinorityFeature {
         // 1. If class have @Translatable annotation, look for fields with @Key annotation and init it
         if (clazz.isAnnotationPresent(Translatable.class)) {
             for (Field field : clazz.getDeclaredFields()) {
-                if (field.isAnnotationPresent(Key.class)) {
-                    final Key key = field.getAnnotation(Key.class);
-                    final String path = key.section() + plugin.getLanguage().options().pathSeparator() + key.path();
+                if (field.isAnnotationPresent(TranslationKey.class)) {
+                    final TranslationKey key = field.getAnnotation(TranslationKey.class);
+                    final String path = key.section() + plugin.getLanguage().options().pathSeparator() + key.name();
                     field.setAccessible(true);
                     plugin.getLogger().info(String.format("Trying to change field %s value to %s.", field.getName(), plugin.getLanguage().get(path)));
                     field.set(object, plugin.getLanguage().get(path));
