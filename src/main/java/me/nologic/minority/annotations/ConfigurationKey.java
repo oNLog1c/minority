@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME) @Target(ElementType.FIELD)
 public @interface ConfigurationKey {
 
-    String path();
+    String name();
 
     /* Default value. */
     String value();

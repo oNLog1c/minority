@@ -11,15 +11,11 @@ import me.nologic.minority.annotations.Translatable;
 import me.nologic.minority.annotations.TranslationKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 public class ConfigurationWizard {
@@ -58,9 +54,9 @@ public class ConfigurationWizard {
                 ConfigurationSection s = config.getConfigurationSection(section.path()) == null ? config.createSection(section.path()) : config.getConfigurationSection(section.path());
                 if (s != null) {
                     // 4.1 We should add and assign keys only if there are no path for it.
-                    if (!s.contains(key.path())) {
-                        s.set(key.path(), key.value());
-                        s.setComments(key.path(), List.of(key.comment())); // Add comments to path in our config.
+                    if (!s.contains(key.name())) {
+                        s.set(key.name(), key.value());
+                        s.setComments(key.name(), List.of(key.comment())); // Add comments to path in our config.
                     }
                 }
 
