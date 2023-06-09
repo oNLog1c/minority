@@ -3,12 +3,6 @@
 
 Documentation: https://nologic.gitbook.io/minority/
 
-## TODO
-- ✓ Language annotations ✓
-- Easy SQLite DB creation
-- Custom biome API
-- QoL-functions in MinorityExpansion
-
 ## Maven
 ```xml
 <repository>
