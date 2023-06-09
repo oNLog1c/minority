@@ -9,7 +9,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.Objects;
 
 public interface MinorityFeature {
 
@@ -43,13 +42,19 @@ public interface MinorityFeature {
                     final YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), section.file()));
                     String path = section.path() + config.options().pathSeparator() + key.name();
                     field.setAccessible(true);
-                    switch (key.type()) {
-                        case STRING -> field.set(object, config.getString(path));
-                        case BOOLEAN -> field.setBoolean(object, config.getBoolean(path));
-                        case INTEGER -> field.setInt(object, config.getInt(path));
-                        case DOUBLE -> field.setDouble(object, config.getDouble(path));
-                        case ENUM -> field.set(object, Enum.valueOf(field.getType().asSubclass(Enum.class), Objects.requireNonNull(config.getString(path)))); // enum used for automatic cast, for example if we're using Material or EntityType as fields
+
+                    // 3. Because of the apostrophe, we have to parse the value ourselves
+                    final String value = config.getString(path);
+                    if (value != null) {
+                        switch (key.type()) {
+                            case STRING -> field.set(object, value);
+                            case BOOLEAN -> field.setBoolean(object, Boolean.parseBoolean(value));
+                            case INTEGER -> field.setInt(object, Integer.parseInt(value));
+                            case DOUBLE -> field.setDouble(object, Double.parseDouble(value));
+                            case ENUM -> field.set(object, Enum.valueOf(field.getType().asSubclass(Enum.class), value)); // enum used for automatic cast, for example if we're using Material or EntityType as fields
+                        }
                     }
+
                 }
             }
         }
