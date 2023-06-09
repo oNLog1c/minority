@@ -42,6 +42,7 @@ public interface MinorityFeature {
 
                     final YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), section.file()));
                     String path = section.path() + config.options().pathSeparator() + key.name();
+                    field.setAccessible(true);
                     switch (key.type()) {
                         case STRING -> field.set(object, config.getString(path));
                         case BOOLEAN -> field.setBoolean(object, config.getBoolean(path));

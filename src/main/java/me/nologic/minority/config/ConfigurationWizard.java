@@ -27,7 +27,6 @@ public class ConfigurationWizard {
 
         // 0. Checking for translation file.
         if (feature.isAnnotationPresent(Translatable.class)) {
-            this.plugin.getLogger().info(String.format("%s is a translatable instance.", feature.getName()));
             this.translate(feature);
         }
 
@@ -101,7 +100,6 @@ public class ConfigurationWizard {
         }
 
         // 5. Generation of the language file completed, now we need to save it.
-        plugin.getLogger().info(String.format("Saving %s to the language folder.", file.getName()));
         language.save(file);
 
     }
