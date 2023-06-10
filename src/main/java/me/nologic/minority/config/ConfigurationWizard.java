@@ -22,13 +22,32 @@ public class ConfigurationWizard {
 
     private final MinorityExtension plugin;
 
+    /**
+     * Generate translation file and/or configuration file for specified class which instanceof MinorityFeature
+     * and have some of these annotations: @Configurable or @Translatable.
+     * @param feature a class that extends MinorityFeature
+     */
     @SneakyThrows
     public final void generate(Class<? extends MinorityFeature> feature) {
 
-        // 0. Checking for translation file.
+        // If class have @Translatable annotation, generate translate file for it
         if (feature.isAnnotationPresent(Translatable.class)) {
-            this.translate(feature);
+            this.generateTranslation(feature);
         }
+
+        // If class have @Configurable annotation, generate config file for it
+        if (feature.isAnnotationPresent(Configurable.class)) {
+            this.generateConfiguration(feature);
+        }
+
+    }
+
+    /**
+     * Automatically used on classes with @Configurable annotation, looking for @ConfigurationKey.
+     * Creates a new config file if it not exist, or update the existing one with the missing keys.
+     * */
+    @SneakyThrows
+    private void generateConfiguration(final Class<? extends MinorityFeature> feature) {
 
         // 1. Firstly, we create a new YamlConfiguration.
         final YamlConfiguration config = new YamlConfiguration();
@@ -62,9 +81,8 @@ public class ConfigurationWizard {
             }
         }
 
-        // 9. And after all the job is done, we shouldn't forget to save the config file!
+        // 5. And after all the job is done, we shouldn't forget to save the config file!
         config.save(file);
-
     }
 
     /**
@@ -72,7 +90,7 @@ public class ConfigurationWizard {
      * Creates a new language file if it not exist, or update the existing one with the missing keys.
      * */
     @SneakyThrows
-    private void translate(Class<? extends MinorityFeature> translatable) {
+    private void generateTranslation(final Class<? extends MinorityFeature> translatable) {
 
         final YamlConfiguration language = new YamlConfiguration();
 

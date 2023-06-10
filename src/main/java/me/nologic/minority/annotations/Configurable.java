@@ -13,6 +13,6 @@ public @interface Configurable {
     String path();
 
     /* Comment, which will be displayed in config file. */
-    String[] comment();
+    String[] comment() default {};
 
 }
