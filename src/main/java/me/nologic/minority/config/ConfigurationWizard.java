@@ -9,8 +9,8 @@ import me.nologic.minority.annotations.Configurable;
 
 import me.nologic.minority.annotations.Translatable;
 import me.nologic.minority.annotations.TranslationKey;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bspfsystems.yamlconfiguration.configuration.ConfigurationSection;
+import org.bspfsystems.yamlconfiguration.file.YamlConfiguration;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -60,9 +60,14 @@ public class ConfigurationWizard {
         if (file.exists()) config.load(file);
 
         // 3. Add header to the config file. TODO: Make it configurable. Or not?
-        config.options().setHeader(Collections.singletonList("This configuration file was automatically generated with Minority."));
+        config.getOptions().setHeader(Collections.singletonList("This configuration file was automatically generated with Minority."));
 
-        // 4. Scan all fields in iterable class, if field have annotation @Key, it will be stored in our config.
+        // 3.1 Add comments to the section (if there any comments)
+        if (section.comment().length > 0) {
+            config.setComments(section.path(), List.of(section.comment()));
+        }
+
+        // 4. Scan all fields in iterable class, if field have annotation @ConfigurationKey, it will be stored in our config.
         for (Field field : feature.getDeclaredFields()) {
             if (field.isAnnotationPresent(ConfigurationKey.class)) {
                 final ConfigurationKey key = field.getAnnotation(ConfigurationKey.class);

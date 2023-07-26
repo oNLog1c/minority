@@ -6,6 +6,7 @@ public enum Type {
     BOOLEAN,
     INTEGER,
     DOUBLE,
+    FLOAT,
     ENUM
 
 }

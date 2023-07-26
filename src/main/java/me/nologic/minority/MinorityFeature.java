@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 public interface MinorityFeature {
 
     /**
-     * Automatic field initialisation (only for language ATM)
+     * Automatic field initialization.
      * @param object is the object which will be initialized
      * @param clazz is a class which should implement MinorityFeature
      * */
@@ -51,6 +51,7 @@ public interface MinorityFeature {
                             case BOOLEAN -> field.setBoolean(object, Boolean.parseBoolean(value));
                             case INTEGER -> field.setInt(object, Integer.parseInt(value));
                             case DOUBLE -> field.setDouble(object, Double.parseDouble(value));
+                            case FLOAT -> field.setFloat(object, Float.parseFloat(value));
                             case ENUM -> field.set(object, Enum.valueOf(field.getType().asSubclass(Enum.class), value)); // enum used for automatic cast, for example if we're using Material or EntityType as fields
                         }
                     }
