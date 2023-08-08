@@ -53,6 +53,7 @@ public interface MinorityFeature {
                             case DOUBLE -> field.setDouble(object, Double.parseDouble(value));
                             case FLOAT -> field.setFloat(object, Float.parseFloat(value));
                             case ENUM -> field.set(object, Enum.valueOf(field.getType().asSubclass(Enum.class), value)); // enum used for automatic cast, for example if we're using Material or EntityType as fields
+                            case LIST_OF_STRINGS -> field.set(object, config.getStringList(path));
                         }
                     }
 
