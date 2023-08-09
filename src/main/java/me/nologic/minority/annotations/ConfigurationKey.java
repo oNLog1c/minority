@@ -11,7 +11,7 @@ public @interface ConfigurationKey {
     String name();
 
     /* Default value. */
-    String value();
+    String[] value();
 
     /* Type of the field. */
     Type type() default Type.STRING;

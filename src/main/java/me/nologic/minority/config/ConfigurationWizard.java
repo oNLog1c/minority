@@ -4,11 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import me.nologic.minority.MinorityExtension;
 import me.nologic.minority.MinorityFeature;
-import me.nologic.minority.annotations.ConfigurationKey;
-import me.nologic.minority.annotations.Configurable;
+import me.nologic.minority.annotations.*;
 
-import me.nologic.minority.annotations.Translatable;
-import me.nologic.minority.annotations.TranslationKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -78,7 +75,8 @@ public class ConfigurationWizard {
                 if (s != null) {
                     // 4.1 We should add and assign keys only if there are no path for it.
                     if (!s.contains(key.name())) {
-                        s.set(key.name(), key.value());
+                        if (key.type().equals(Type.LIST_OF_STRINGS)) s.set(key.name(), List.of(key.value()));
+                        else s.set(key.name(), key.value()[0]);
                         s.setComments(key.name(), List.of(key.comment())); // Add comments to path in our config.
                     }
                 }
