@@ -4,6 +4,9 @@
 ## Documentation 
 https://nologic.gitbook.io/minority/
 
+## Building
+`mvn clean package`
+
 ## Maven
 ```xml
 <repository>
