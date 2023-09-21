@@ -1,5 +1,6 @@
 package me.nologic.minority.config;
 
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import me.nologic.minority.MinorityExtension;
@@ -57,7 +58,7 @@ public class ConfigurationWizard {
         if (file.exists()) config.load(file);
 
         // 3. Add header to the config file. TODO: Make it configurable. Or not?
-        config.options().setHeader(Collections.singletonList("This configuration file was automatically generated with Minority."));
+        config.options().setHeader(Lists.newArrayList("This configuration file was automatically generated with Minority.", "Color formatting: use &-symbol or #FFFFFF hex-format to define custom colors."));
 
         // 3.1 Add comments to the section (if there any comments)
         if (section.comment().length > 0) {
