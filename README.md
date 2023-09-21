@@ -17,6 +17,6 @@ https://nologic.gitbook.io/minority/
 <dependency>
     <groupId>com.github.oNLog1c</groupId>
     <artifactId>minority</artifactId>
-    <version>1.4</version>
+    <version>2.3</version>
 </dependency>
 ```
