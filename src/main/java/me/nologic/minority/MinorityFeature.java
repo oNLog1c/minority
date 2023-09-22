@@ -30,7 +30,7 @@ public interface MinorityFeature {
                     final TranslationKey key = field.getAnnotation(TranslationKey.class);
                     final String path = key.section() + plugin.getLanguage().options().pathSeparator() + key.name();
                     field.setAccessible(true);
-                    field.set(object, plugin.getLanguage().get(this.translateColors(path)));
+                    field.set(object, this.translateColors(plugin.getLanguage().getString(path)));
                 }
             }
         }
