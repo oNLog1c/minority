@@ -10,6 +10,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -55,7 +57,7 @@ public interface MinorityFeature {
                         case DOUBLE -> field.setDouble(object, Double.parseDouble(value));
                         case FLOAT -> field.setFloat(object, Float.parseFloat(value));
                         case ENUM -> field.set(object, Enum.valueOf(field.getType().asSubclass(Enum.class), value)); // enum used for automatic cast, for example if we're using Material or EntityType as fields
-                        case LIST_OF_STRINGS -> field.set(object, config.getStringList(path));
+                        case LIST_OF_STRINGS -> field.set(object, this.translateColors(config.getStringList(path)));
                     }
 
                 }
@@ -78,6 +80,26 @@ public interface MinorityFeature {
         }
 
         return ChatColor.translateAlternateColorCodes('&', message);
+    }
+
+    // Automatic color parsing with & and HEX-formatting support.
+    // To define custom colors use #FFFFFF.
+    private List<String> translateColors(List<String> messages) {
+
+        final List<String> formatted = new ArrayList<>();
+        for (String message : messages) {
+            Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
+            Matcher matcher = pattern.matcher(message);
+
+            while (matcher.find()) {
+                String color = message.substring(matcher.start(), matcher.end());
+                message = message.replace(color, "" + ChatColor.of(color));
+                matcher = pattern.matcher(message);
+                formatted.add(message);
+            }
+        }
+
+        return formatted;
     }
 
 }
