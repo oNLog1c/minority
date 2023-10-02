@@ -85,20 +85,8 @@ public interface MinorityFeature {
     // Automatic color parsing with & and HEX-formatting support.
     // To define custom colors use #FFFFFF.
     private List<String> translateColors(List<String> messages) {
-
         final List<String> formatted = new ArrayList<>();
-        for (String message : messages) {
-            Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
-            Matcher matcher = pattern.matcher(message);
-
-            while (matcher.find()) {
-                String color = message.substring(matcher.start(), matcher.end());
-                message = message.replace(color, "" + ChatColor.of(color));
-                matcher = pattern.matcher(message);
-                formatted.add(message);
-            }
-        }
-
+        messages.forEach(message -> formatted.add(this.translateColors(message)));
         return formatted;
     }
 
